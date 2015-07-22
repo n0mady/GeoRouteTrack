@@ -17,6 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$','login.views.login',name='Login'),
-    url(r'^admin/', include(admin.site.urls)),
+    	url(r'^$','login.views.login',name='Login'),
+    	url(r'^admin/', include(admin.site.urls)),
+
+    	#URLs for User Authentication
+    	#url(r'^accounts/login/$','login.views.login',name='Login'),
+	#url(r'^accounts/auth$','login.views.authview',name='Authentication'),
+	#url(r'^accounts/loggedin/$','login.views.loggedin',name='LoggedIn'),
+	#url(r'^accounts/logout/$','login.views.loggedout',name='LogOut'),
+	#url(r'^accounts/invalid/$','login.views.invalidlogin',name='InvalidLogin'),
 ]
