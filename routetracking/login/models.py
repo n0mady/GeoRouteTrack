@@ -16,4 +16,4 @@ class Login(models.Model):
 	OS		=platform()
 
 	def __str__(self):
-		return self.Pwd
+		return self.Email

@@ -1,0 +1,94 @@
+
+<title>Process Map Data in Dictionries</title>
+<script>
+var SheetData={}
+var GeoData={}
+var Lat="Lat"
+var Lng="Lng"
+var Elv="Elv"
+var Mrkr="Mrkr"
+</script>
+
+{% for Sheet,RouteData in GeoRouteData.items %}
+    <script>
+    var Sheet="{{Sheet}}"
+    var GeoData={}
+    </script>
+
+    {% for Location,LocationDetails in RouteData.items %}
+        <script> var Location="{{Location}}"</script>
+    
+        {% for Parameter,Value in LocationDetails.items   %}
+            {% if Parameter == "Lat" %}
+                <script> Latitude = "{{Value}}"</script>
+            {% endif %}
+    
+            {% if Parameter == "Lng" %}
+                <script> Longitude = "{{Value}}"</script>
+            {% endif %}
+            
+            {% if Parameter == "Elv" %}
+                <script> Elevation = "{{Value}}"</script>
+            {% endif %}
+            
+            {% if Parameter == "Mrkr" %}
+                <script> MarkerText = "{{Value}}"</script>
+            {% endif %}         
+        
+        {% endfor %}
+       
+        <script> GeoData[Location]={"Lat":Latitude,"Lng":Longitude,"Elv":Elevation,"Mrkr":MarkerText}  </script>
+        
+    {% endfor %}
+        
+    <script> SheetData[Sheet]=GeoData </script>   
+
+{% endfor %}
+    
+<script>
+    for (var Sheet in SheetData)
+    {
+        for (var Location in SheetData[Sheet])
+        {
+           document.write(" ")
+           document.write("Sheet    :   " + Sheet  +"</br>")
+           document.write("Location    :   " + Location  +"</br>")
+           document.write("Latitude    :   " + SheetData[Sheet][Location][Lat] + "</br>")
+           document.write("Longitude   :   " + SheetData[Sheet][Location][Lng] + "</br>")       
+           document.write("Elevation   :   " + SheetData[Sheet][Location][Elv] + "</br>")
+           document.write("Marker      :   " + SheetData[Sheet][Location][Mrkr] + "</br>")
+           document.write("</br>")
+        }  
+    }
+</script>
+
+<script>
+function Table(){
+    var body = document.body,
+        tbl  = document.createElement('table');
+        tbl.style.width  = '100px';
+        tbl.style.border = '1px solid black';
+
+    for(var i = 0; i < 3; i++){
+        var tr = tbl.insertRow();
+        for(var j = 0; j < 2; j++)
+        {
+            if(i == 2 && j == 1)
+            {
+                break;
+            }
+            else {
+                    var td = tr.insertCell();
+                    td.appendChild(document.createTextNode('Cell'));
+                    td.style.border = '1px solid black';
+                    if(i == 1 && j == 1){
+                    td.setAttribute('rowSpan', '2');
+                }
+            }
+        }
+    }
+    body.appendChild(tbl);
+}
+tableCreate();
+
+</script>

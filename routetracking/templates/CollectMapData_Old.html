@@ -1,0 +1,48 @@
+
+<title>Process Map Data in Dictionries</title>
+<script>
+var GeoData={}
+var Lat="Lat"
+var Lng="Lng"
+var Elv="Elv"
+var Mrkr="Mrkr"
+</script>
+
+{% for Location,LocationDetails in GeoRouteData.items %}
+    <script> var Location="{{Location}}"</script>
+
+    {% for Parameter,Value in LocationDetails.items   %}
+        {% if Parameter == "Lat" %}
+            <script> Latitude = "{{Value}}"</script>
+        {% endif %}
+
+        {% if Parameter == "Lng" %}
+            <script> Longitude = "{{Value}}"</script>
+        {% endif %}
+        
+        {% if Parameter == "Elv" %}
+            <script> Elevation = "{{Value}}"</script>
+        {% endif %}
+        
+        {% if Parameter == "Mrkr" %}
+            <script> MarkerText = "{{Value}}"</script>
+        {% endif %}         
+    
+    {% endfor %}
+   
+    <script>
+            GeoData[Location]={"Lat":Latitude,"Lng":Longitude,"Elv":Elevation,"Mrkr":MarkerText}
+    </script>    
+{% endfor %}
+
+<script>
+    for (var Location in GeoData) {
+        //document.write("<a href")
+        //document.write("Location    :   " + Location  +"</br>")
+        //document.write("Latitude    :   " + GeoData[Location][Lat] + "</br>")
+        //document.write("Longitude   :   " + GeoData[Location][Lng] + "</br>")       
+        //document.write("Elevation   :   " + GeoData[Location][Elv] + "</br>")
+        //document.write("Marker      :   " + GeoData[Location][Mrkr] + "</br>")
+        //document.write("</br>")
+    }
+</script>

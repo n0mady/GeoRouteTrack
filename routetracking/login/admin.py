@@ -9,6 +9,5 @@ class LoginAdmin(admin.ModelAdmin):
 	form = LoginForm
 	#class Meta:
 	#	model = Login
-	
 
 admin.site.register(Login,LoginAdmin) 

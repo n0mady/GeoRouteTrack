@@ -1,0 +1,99 @@
+
+<title>Debug Output - Excel Parsed Data</title>
+<script>
+var SheetData={}
+var GeoData={}
+var Lat="Lat"
+var Lng="Lng"
+var Elv="Elv"
+var Mrkr="Mrkr"
+</script>
+
+{% for Sheet,RouteData in GeoRouteData.items %}
+    <script>
+    var Sheet="{{Sheet}}"
+    var GeoData={}
+    </script>
+
+    {% for Location,LocationDetails in RouteData.items %}
+        <script> var Location="{{Location}}"</script>
+    
+        {% for Parameter,Value in LocationDetails.items   %}
+            {% if Parameter == "Lat" %}
+                <script> Latitude = "{{Value}}"</script>
+            {% endif %}
+    
+            {% if Parameter == "Lng" %}
+                <script> Longitude = "{{Value}}"</script>
+            {% endif %}
+            
+            {% if Parameter == "Elv" %}
+                <script> Elevation = "{{Value}}"</script>
+            {% endif %}
+            
+            {% if Parameter == "Mrkr" %}
+                <script> MarkerText = "{{Value}}"</script>
+            {% endif %}         
+        
+        {% endfor %}
+       
+        <script> GeoData[Location]={"Lat":Latitude,"Lng":Longitude,"Elv":Elevation,"Mrkr":MarkerText}  </script>
+        
+    {% endfor %}
+        
+    <script> SheetData[Sheet]=GeoData </script>   
+
+{% endfor %}
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+table#t01 {
+    width: 100%;
+    background-color: #f1f1c1;
+} 
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+    background-color: #fff;
+}
+table#t01 th {
+    color: white;
+    background-color: black;
+} 
+</style>
+    
+<script>
+    document.write('<table id="t01" style="width:100%">')
+    document.write('<caption>Parsed Excel Coordinates Data</caption>')
+    document.write("<tr>")
+    document.write("<th>Sheet</td>")
+    document.write("<th>Location</td>")
+    document.write("<th>Latitude</td>")
+    document.write("<th>Longitude</td>")       
+    document.write("<th>Elevation</td>")
+    document.write("<th>Marker</td>")
+    document.write("</tr>")
+    
+    for (var Sheet in SheetData)
+    {
+        var color='#' + Math.random().toString(16).substr(-6)
+        for (var Location in SheetData[Sheet])
+        {
+           document.write("<tr>")
+           document.write("<td>"+Sheet+"</td>")
+           document.write("<td>"+ Location  +"</td>")
+           document.write("<td>"+ SheetData[Sheet][Location][Lat] +"</td>")
+           document.write("<td>"+ SheetData[Sheet][Location][Lng] +"</td>")       
+           document.write("<td>"+ SheetData[Sheet][Location][Elv] +"</td>")
+           document.write("<td>"+SheetData[Sheet][Location][Mrkr] +"</td>")
+           document.write("</tr>")
+        }  
+    }
+</script>

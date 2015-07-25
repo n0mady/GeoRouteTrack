@@ -1,5 +1,11 @@
-<h1> I am creating a new login screen for the GeoRoute Track App </h1>
-
 <title>{{title}}</title>
 
-{{ user }}
+<form method="POST" action=""> {% csrf_token %}
+
+{{ form.as_p }}
+
+<input type="submit" value="Login"/>
+
+</form>
+
+
