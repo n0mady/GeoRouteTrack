@@ -26,6 +26,7 @@ urlpatterns = [
 	#Please comment this line during deployment
 	url(r'^admin/', include(admin.site.urls)),
     	url(r'^georoutetrackapp/', include(admin.site.urls)),
+	url(r'^accounts/', include('registration.backends.default.urls')),
 
     	#URLs for User Authentication
     	#url(r'^accounts/login/$','login.views.login',name='Login'),

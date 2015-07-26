@@ -1,8 +1,5 @@
 {% load staticfiles %}
 
-<!--Dummy inclusion for Proper Alignment of the SignIn Page-->
-{% include "navbar.html" %}
-
 {% include "meta.html" %}
 
 {% include "bootstrap-css.html" %}
@@ -18,9 +15,9 @@
     
   </head>
 
-    <body class="body" style="background-color:black;">
+    <body class="body">
       
-      {% block geotrackbody %}
+      {% block content %}
       
       {% endblock %}
     
