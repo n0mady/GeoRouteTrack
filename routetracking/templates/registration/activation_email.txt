@@ -1,13 +1,18 @@
 {% load i18n %}
 {% trans "Activate account at" %} {{ site.name }}:
 
-Hello there!
+Hello,
 
-Click the link below to activate your account.
+Welcome to GeoRoute Track - A World you (will) trail across !
+
+Kindly request you to punch your mouse on the below link to dive in.
 
 http://{{ site.domain }}{% url 'registration_activate' activation_key %}
 
 
 {% blocktrans %}The above link is valid for {{ expiration_days }} days.{% endblocktrans %}
 
--Team CFE
+
+Regards
+Team GeoRoute Track
+
