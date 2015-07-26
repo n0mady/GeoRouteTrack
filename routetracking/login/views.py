@@ -36,7 +36,7 @@ def login(request):
 
 	LoginData['title']=title
 	LoginData['form']=form
-	return render(request,'login.html',LoginData)
+	return render(request,'georoutetrack.html',LoginData)
 
 
 

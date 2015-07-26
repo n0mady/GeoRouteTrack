@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+                
+{% block geotrackbody %}
+  
+            <div class="container-fluid">  
+                <form class="form-signin col-lg-offset-12">
+                    <h3 class="form-signin-heading col-lg-offset-12" id="Login" style="color:white">GeoRoute<span style="color: #53ABff">Track</span></h3>
+                    <label for="inputEmail" class="sr-only col-lg-offset-12">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control col-lg-offset-12" placeholder="Email address"  required autofocus>
+                    <label for="inputPassword" class="sr-only col-lg-offset-12">Password</label>
+                    <input type="password" id="inputPassword" class="form-control col-lg-offset-12" placeholder="Password" required>
+                    <div class="checkbox col-lg-offset-12" style="color: white;">
+                      <label>
+                        <input type="checkbox" value="remember-me" style="color:white;">Remember</label>
+                    </div>
+                    <button class="btn btn-lg btn-primary col-lg-offset-12" type="submit">Sign in</button>
+                  </form>
+            </div>
+    
+{% endblock %}
+
+{% block title %}
+
+    {% if user.is_authenticated %}
+        Welcome | {{ user }}
+    {% else %}
+        GeoRouteTrack
+    {% endif %}
+ 
+{% endblock %}
