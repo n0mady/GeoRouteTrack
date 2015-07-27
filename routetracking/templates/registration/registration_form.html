@@ -14,22 +14,13 @@
           {% csrf_token %}
           {{ form|crispy }}
         
-          <input class='btn btn-block btn-primary' type="submit" value="{% trans 'Join' %}" />
+          <input class='btn btn-primary' type="submit" value="{% trans 'Join' %}" />
         </form>
         </div>
         </div>
         
         <hr/>
-        <div class='row'>
-        <div class='col-sm-6 col-sm-offset-3 text-align-center'>
-        <p>Need to <a href="{% url 'Login' %}">Login</a>?</p>
-        </div>
-        </div>
-        
-    {% endif }
         
   {% endif %}
 
-
 {% endblock %}
-

@@ -1,8 +1,15 @@
 {% extends "base.html" %}
+
 {% load i18n %}
 
 {% block content %}
 
-<p>{% trans "Account activation failed" %}</p>
+    <div class="alert alert-danger" role="alert">
+        <strong>Very Sorry!</strong> Account activation failed
+    </div>
+    
+    <form class="form-relogin" method="POST" action="{% url 'Login' %}">{% csrf_token %}
+        <button class="btn btn-lg btn-primary" type="submit">Log in</button>   
+    </form>
 
 {% endblock %}
