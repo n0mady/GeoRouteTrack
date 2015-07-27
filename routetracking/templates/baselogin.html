@@ -1,21 +1,20 @@
 {% load staticfiles %}
 
-<!DOCTYPE html>
-
-{% include "meta.html" %}
-
-{% include "bootstrap-css.html" %}
-
-{% include "bootstrap-js.html" %}
+<html>
   
-<html lang="en">
+  {% include "meta.html" %}
+
+  {% include "bootstrap-css.html" %}
+  
+  {% include "bootstrap-js.html" %}
+
   <head>
 
     <title>{% block title %}{% endblock %}</title>
     
   </head>
 
-    <body class="body" style="background-color: black">
+    <body class="body">
       
       {% block content %}
       

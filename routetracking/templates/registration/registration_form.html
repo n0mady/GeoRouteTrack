@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 
-
-{% load i18n %}
-{% load crispy_forms_tags %}
-
-
-
-
 {% block content %}
+  
+  {% load i18n %}
+  {% load crispy_forms_tags %}
   
   {% if user.is_authenticated %}
     
@@ -26,7 +22,7 @@
         <hr/>
         <div class='row'>
         <div class='col-sm-6 col-sm-offset-3 text-align-center'>
-        <p>Need to <a href="{% url 'auth_login' %}">Login</a>?</p>
+        <p>Need to <a href="{% url 'Login' %}">Login</a>?</p>
         </div>
         </div>
         
