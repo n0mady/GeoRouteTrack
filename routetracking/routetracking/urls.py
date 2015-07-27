@@ -19,21 +19,14 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
-    	url(r'^$','login.views.login',name='Login'),
-	url(r'^excel/$','login.views.excel',name='Contact'),
-	url(r'^map/$','login.views.RenderMap',name='Map Render'),
-	url(r'^debug/parseddata/$','login.views.parseddata',name='For Debugging - Parsed Data'),
+    	url(r'^$','login.views.LoginView',name='Login'),
+	url(r'^accounts/', include('registration.backends.default.urls')),
+	url(r'^excel/$','login.views.ExcelView',name='Provide Excel'),
+	url(r'^map/$','login.views.MapView',name='Map Render'),
+	url(r'^debug/parseddata/$','login.views.DebugViewParsedData',name='For Debugging - Parsed Data'),
 	#Please comment this line during deployment
 	url(r'^admin/', include(admin.site.urls)),
-    	url(r'^georoutetrackapp/', include(admin.site.urls)),
-	url(r'^accounts/', include('registration.backends.default.urls')),
-
-    	#URLs for User Authentication
-    	#url(r'^accounts/login/$','login.views.login',name='Login'),
-	#url(r'^accounts/auth$','login.views.authview',name='Authentication'),
-	#url(r'^accounts/loggedin/$','login.views.loggedin',name='LoggedIn'),
-	#url(r'^accounts/logout/$','login.views.loggedout',name='LogOut'),
-	#url(r'^accounts/invalid/$','login.views.invalidlogin',name='InvalidLogin'),
+	url(r'^georoutetrackapp/', include(admin.site.urls)),
 ] 
 
 

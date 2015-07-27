@@ -1,4 +1,15 @@
 <html>
+  
+  {% include "collect-map-data.html"%}
+  
+  {% include "navbar.html" %}
+  
+  {% include "meta.html" %}
+
+  {% include "bootstrap-css.html" %}
+  
+  {% include "bootstrap-js.html" %}
+  
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -52,21 +63,27 @@
 
 	  	var Geo_Route_Track = new google.maps.Map(document.getElementById('map-canvas'),MapProperties);
 
-		for(j=0;j<5;j++)
+		for (var Sheet in SheetData)
 		{
 			Init_Latitude+=5;
 			Init_Longitude+=-25;
-		
+			
+			GeoData=SheetData[Sheet]
 
-			for(i=0;i<=10;i++)
+			for (var Location in GeoData)
 			{
-				Route.push(Coordinates(Init_Latitude+i,Init_Longitude+i+1,i.toString))
+				//alert(Location)
+				
+				var Markr=Location.toString + " " + (GeoData[Location][Mrkr]).toString 
+			  
+			  
+				Route.push(Coordinates(GeoData[Location][Lat],GeoData[Location][Lng],Location.toString))
 				//Markers(Init_Latitude+i,Init_Longitude+i+1,i.toString)
 
 				  var infowindow = null;
 
 				  var marker=new google.maps.Marker({
-				      position: new google.maps.LatLng(Init_Latitude+i, Init_Longitude+i+1),
+				      position: new google.maps.LatLng(GeoData[Location][Lat], GeoData[Location][Lng]),
 				      map: Geo_Route_Track,
 				      title: 'Sample'
 				  });
@@ -76,10 +93,11 @@
 				  infowindow = new google.maps.InfoWindow(); 	
 
 				  google.maps.event.addListener(MarkerData[MarkerData.length-1], 'click', function () {
-				    infowindow.setContent('<div contentEditable="true">Some Useless Text</div>')
+				    infowindow.setContent('<div contentEditable="true">Markr</div>')
 				    infowindow.open(Geo_Route_Track,this);
 				  });
-
+				  
+			    
 			}
 
 			  var Geo_Route = new google.maps.Polyline({
@@ -122,6 +140,18 @@
     <div id="map-canvas"></div>
   </body>
 </html>
+
+<script>
+    for (var Location in GeoData) {
+        document.write("<a href")
+        document.write("Location    :   " + Location  +"</br>")
+        document.write("Latitude    :   " + GeoData[Location][Lat] + "</br>")
+        document.write("Longitude   :   " + GeoData[Location][Lng] + "</br>")       
+        document.write("Elevation   :   " + GeoData[Location][Elv] + "</br>")
+        document.write("Marker      :   " + GeoData[Location][Mrkr] + "</br>")
+        document.write("</br>")
+    }
+</script>
 
 
 <script>

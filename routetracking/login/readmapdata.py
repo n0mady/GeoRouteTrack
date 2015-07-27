@@ -28,15 +28,3 @@ def ReadMap(Filename="Data.xls",Location_Column=1,Latitude_Column=2,Longitude_Co
 				GeoRouteData[str(SheetNumber)]=RouteData
 
 	return GeoRouteData
-
-
-#GeoRouteData=ReadMap("MapCoordinates.xls")
-#
-#
-#for Sheet in GeoRouteData.keys():
-#	L0=GeoRouteData[Sheet]
-#	for Location in L0.keys():
-#		L1=L0[Location]
-#		for key1 in L1.keys():
-#			print "Sheet Number : => " + Sheet + " Location : => " + Location	
-#			print key1 + " : => " + L1[key1]

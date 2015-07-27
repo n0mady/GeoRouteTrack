@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -41,12 +40,6 @@ INSTALLED_APPS = (
     'crispy_forms',
     'login',
     'registration',
-    
-    ## Third Party Apps
-    #'registration',
-    ## My Apps
-    #'login',
-    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,7 +102,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/staticabc/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT= os.path.join(os.path.dirname(BASE_DIR),"static_in_env","our_static")
 
