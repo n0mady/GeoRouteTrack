@@ -50,45 +50,11 @@ def DebugViewParsedData(request):
 		return render(request,'georoutetrack.html',{})
 	
 
-class ExcelView(FormView):
-	form_class = FileForm
-	template_name = "excel-file-input.html"
-	#def get_form(self, form_class):
-	#	contact = FileUpload.objects.get('files')
-	#	print contact
-	#	return form_class(instance=contact, **self.get_form_kwargs())	
-	
-	def form_valid(self, form):
-		self.object=form.save(commit=True)
-		return super(ExcelView, self).form_valid(form)
-	
-		#print self.get_form_kwargs()
-		#Data=self.get_form_kwargs()
-		#
-		
-
-	#print FileUpload.f + "Fuck you mother fucker"
-	#
-	#for key in Data:
-	#    print key
-	#    print key['files']
-		  
-	    #print self.get_form_kwargs.
-	    #print(self.request.GET['f'])
-	    
-	    #print instance['f']
-	    #messages.success(self.request, 'File uploaded!', fail_silently=True)
-	    #return super(ExcelView, self).form_valid(form)
-	    
-	    
-def ExcelViewTest(request):
+def ExcelView(request):
 	if request.POST:
-	    #print request.POST
 	    form = FileForm(request.POST, request.FILES)
-	    print request.FILES['f']
 	    if form.is_valid():
 		form.save()
-		print request.POST
 		FilePath["Excel"]=request.FILES['f']
 		return HttpResponseRedirect('/map')
 	else:

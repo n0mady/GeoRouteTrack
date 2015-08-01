@@ -17,13 +17,12 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
-from login.views import ExcelView,ExcelViewTest
+from login.views import ExcelView
 
 urlpatterns = [
     	url(r'^$','login.views.LoginView',name='Login'),
 	url(r'^accounts/', include('registration.backends.default.urls')),
-	url(r'^mapc/?$', 'login.views.ExcelViewTest', name='readmapdata'),
-	url(r'^excel/?$', ExcelView.as_view(), name='readmapdata1'),	
+	url(r'^excel/?$', 'login.views.ExcelView', name='readmapdata1'),	
 	url(r'^map/$','login.views.MapView',name='Map Render'),
 	url(r'^debug/parseddata/$','login.views.DebugViewParsedData',name='For Debugging - Parsed Data'),
 	#Please comment this line during deployment
