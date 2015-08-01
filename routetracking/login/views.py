@@ -81,7 +81,7 @@ def ExcelViewTest(request):
 	    if form.is_valid():
 		form.save()
 		print request.POST
-		return HttpResponseRedirect('/mapc')
+		return HttpResponseRedirect('/map')
 	else:
 		form=FileForm()
 	

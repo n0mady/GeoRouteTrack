@@ -5,4 +5,4 @@ class FileForm(forms.ModelForm):
     """Upload files with this form"""
     class Meta:
         model = FileUpload
-        exclude = ('MD5',)
+        exclude = ('md5',)

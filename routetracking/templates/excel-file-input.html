@@ -11,7 +11,6 @@
 {{ form.non_field_errors }}
 
   <form class="form-inline" action="{% url 'readmapdata' %}" method="POST" enctype="multipart/form-data">
-
   
     <h1 class="col-lg-offset-4"><small>Choose your Map Coordinates File</small></h1>
 
@@ -27,7 +26,5 @@
     <input type="submit" id="submit" class="btn btn-primary btn-md .col-md-6 .col-md-offset-3" value="Submit to Plot">
     {% csrf_token %}
   </form>
-
-  {{ FileUpload.f }}
 
 {% endblock %}
