@@ -1,14 +1,33 @@
+{% extends "base.html" %}
 
-<form action=""{% url 'ReadMapData' %}"" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-    
-    <p>Forget the Fuckign File</p>
-    
-    {{ form.as_p }}
-    
-    {{ UploadFiles.User }}
-    
-    {{ UploadFiles.HostName }}
-    
-    <input type="submit" value="Submit"/>
+{% load crispy_forms_tags %}
 
-</form>
+{% block title %}Map Coordinates{% endblock %}
+
+
+{% block content %}
+
+
+{{ form.non_field_errors }}
+
+  <form class="form-inline" action="{% url 'readmapdata' %}" method="POST" enctype="multipart/form-data">
+
+  
+    <h1 class="col-lg-offset-4"><small>Choose your Map Coordinates File</small></h1>
+
+      <div class="form-group col-md-2 col-md-offset-2">
+        
+        {{ form.f.errors }}
+           
+      </div>
+      <div class="form-group">
+           {{ form.f }}
+      </div>
+
+    <input type="submit" id="submit" class="btn btn-primary btn-md .col-md-6 .col-md-offset-3" value="Submit to Plot">
+    {% csrf_token %}
+  </form>
+
+  {{ FileUpload.f }}
+
+{% endblock %}

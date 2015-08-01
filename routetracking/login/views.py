@@ -2,7 +2,6 @@ from django.shortcuts import render,render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-from .forms import LoginForm,ExcelForm
 from readmapdata import ReadMap
 
 from django.core.urlresolvers import reverse_lazy
@@ -14,18 +13,6 @@ from .models import FileUpload
 def LoginView(request):
 	LoginData={}
 	return render(request,'georoutetrack.html',LoginData)
-
-
-def ExcelView(request):
-	form=ExcelForm(request.POST,request.FILES)
-
-	context = {"form":form}
-
-	if not str(request.user)=="AnonymousUser":
-		return render(request,'excel-file-input.html',context)
-	else:
-		return render(request,'georoutetrack.html',{})
-
 
 def MapView(request):
 	GeoRouteData={}
@@ -55,14 +42,51 @@ def DebugViewParsedData(request):
 		return render(request,'georoutetrack.html',{})
 	
 
-class FileAddView(FormView):
+class ExcelView(FormView):
+	form_class = FileForm
+	template_name = "excel-file-input.html"
+	#def get_form(self, form_class):
+	#	contact = FileUpload.objects.get('files')
+	#	print contact
+	#	return form_class(instance=contact, **self.get_form_kwargs())	
+	
+	def form_valid(self, form):
+		self.object=form.save(commit=True)
+		return super(ExcelView, self).form_valid(form)
+	
+		#print self.get_form_kwargs()
+		#Data=self.get_form_kwargs()
+		#
+		
 
-    form_class = FileForm
-    #success_url = reverse_lazy('home')
-    template_name = "add.html"
-
-    def form_valid(self, form):
-        instance=form.save(commit=True)
-	print instance['f']
-        messages.success(self.request, 'File uploaded!', fail_silently=True)
-        return super(FileAddView, self).form_valid(form)
+	#print FileUpload.f + "Fuck you mother fucker"
+	#
+	#for key in Data:
+	#    print key
+	#    print key['files']
+		  
+	    #print self.get_form_kwargs.
+	    #print(self.request.GET['f'])
+	    
+	    #print instance['f']
+	    #messages.success(self.request, 'File uploaded!', fail_silently=True)
+	    #return super(ExcelView, self).form_valid(form)
+	    
+	    
+def ExcelViewTest(request):
+	if request.POST:
+	    #print request.POST
+	    form = FileForm(request.POST, request.FILES)
+	    print request.FILES['f']
+	    if form.is_valid():
+		form.save()
+		print request.POST
+		return HttpResponseRedirect('/mapc')
+	else:
+		form=FileForm()
+	
+	context = {}
+	context.update(csrf(request))
+	context["form"]=form
+	
+	return render_to_response('excel-file-input.html',context)
