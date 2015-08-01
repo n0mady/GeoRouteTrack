@@ -9,6 +9,9 @@ from django.views.generic import ListView, FormView
 from django.contrib import messages
 from .forms import FileForm
 from .models import FileUpload
+from django.conf import settings
+
+FilePath={}
 
 def LoginView(request):
 	LoginData={}
@@ -16,7 +19,12 @@ def LoginView(request):
 
 def MapView(request):
 	GeoRouteData={}
-	GeoRouteData=ReadMap("/home/N0maD/My_Works/Django/18_07_2015/Step0/routetracking/templates/MapCoordinates.xls")
+	
+	FilePath["file_with_path"]=str(settings.MEDIA_ROOT) + "/" + str(FilePath["Excel"])
+	
+	print FilePath["file_with_path"]
+	
+	GeoRouteData=ReadMap(FilePath["file_with_path"])
 
 	context={}
 	context["GeoRouteData"]=GeoRouteData
@@ -31,7 +39,7 @@ def DebugViewParsedData(request):
 	""" This Function is for the Debugging Purpose and it will be visible even during production """
 	
 	GeoRouteData={}
-	GeoRouteData=ReadMap("/home/N0maD/My_Works/Django/18_07_2015/Step0/routetracking/templates/MapCoordinates.xls")
+	GeoRouteData=ReadMap(FilePath["file_with_path"])
 
 	context={}
 	context["GeoRouteData"]=GeoRouteData
@@ -81,6 +89,7 @@ def ExcelViewTest(request):
 	    if form.is_valid():
 		form.save()
 		print request.POST
+		FilePath["Excel"]=request.FILES['f']
 		return HttpResponseRedirect('/map')
 	else:
 		form=FileForm()
