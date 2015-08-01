@@ -17,16 +17,19 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
+from login.views import FileAddView
 
 urlpatterns = [
     	url(r'^$','login.views.LoginView',name='Login'),
 	url(r'^accounts/', include('registration.backends.default.urls')),
-	url(r'^excel/$','login.views.ExcelView',name='Provide Excel'),
+	url(r'^excel/$','login.views.ExcelView',name='ReadMapData'),
 	url(r'^map/$','login.views.MapView',name='Map Render'),
 	url(r'^debug/parseddata/$','login.views.DebugViewParsedData',name='For Debugging - Parsed Data'),
 	#Please comment this line during deployment
 	url(r'^admin/', include(admin.site.urls)),
 	url(r'^georoutetrackapp/', include(admin.site.urls)),
+	url(r'^add/?$', FileAddView.as_view(), name='filebaby-add'),
+	
 ] 
 
 

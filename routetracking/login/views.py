@@ -5,24 +5,26 @@ from django.core.context_processors import csrf
 from .forms import LoginForm,ExcelForm
 from readmapdata import ReadMap
 
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import ListView, FormView
+from django.contrib import messages
+from .forms import FileForm
+from .models import FileUpload
+
 def LoginView(request):
 	LoginData={}
 	return render(request,'georoutetrack.html',LoginData)
 
 
 def ExcelView(request):
-	form=ExcelForm(request.POST or None)
-	print form['ExcelFile']
-	print form['MapFile']
-	if form.is_valid():
-		instance1=form.save(commit=False)
-		print instance1.MapFile + "Fuck"
-		print instance1.ExcelFile
-		instance1.save()
+	form=ExcelForm(request.POST,request.FILES)
 
 	context = {"form":form}
-		
-	return render(request,'excel-file-input.html',context)
+
+	if not str(request.user)=="AnonymousUser":
+		return render(request,'excel-file-input.html',context)
+	else:
+		return render(request,'georoutetrack.html',{})
 
 
 def MapView(request):
@@ -31,8 +33,11 @@ def MapView(request):
 
 	context={}
 	context["GeoRouteData"]=GeoRouteData
-
-	return render(request,'google-maps-render.html',context)
+	
+	if not str(request.user)=="AnonymousUser":
+		return render(request,'google-maps-render.html',context)
+	else:
+		return render(request,'georoutetrack.html',{})
 
 
 def DebugViewParsedData(request):
@@ -44,4 +49,20 @@ def DebugViewParsedData(request):
 	context={}
 	context["GeoRouteData"]=GeoRouteData
 	
-	return render(request,'debug-parsed-data.html',context)
+	if not str(request.user)=="AnonymousUser":
+		return render(request,'debug-parsed-data.html',context)
+	else:
+		return render(request,'georoutetrack.html',{})
+	
+
+class FileAddView(FormView):
+
+    form_class = FileForm
+    #success_url = reverse_lazy('home')
+    template_name = "add.html"
+
+    def form_valid(self, form):
+        instance=form.save(commit=True)
+	print instance['f']
+        messages.success(self.request, 'File uploaded!', fail_silently=True)
+        return super(FileAddView, self).form_valid(form)

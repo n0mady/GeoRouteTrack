@@ -1,11 +1,11 @@
 from django import forms
-from .models import Login
+from .models import Login,UploadFiles,FileUpload
 
 class LoginForm(forms.ModelForm):
 	
 	class Meta:
 		model=Login
-		fields=['Email','Pwd']
+		fields=['Email']
 
 	def clean_Email(self):
 		_Email=self.cleaned_data['Email']
@@ -18,6 +18,14 @@ class LoginForm(forms.ModelForm):
 		return _Pwd
 
 
-class ExcelForm(forms.Form):
-	ExcelFile=forms.CharField(required=False)
-	MapFile=forms.FileField() 
+class ExcelForm(forms.ModelForm):
+	print "asd"	
+
+
+class FileForm(forms.ModelForm):
+    """Upload files with this form"""
+    class Meta:
+        model = FileUpload
+        exclude = ('md5',)
+
+	
