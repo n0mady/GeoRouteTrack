@@ -1,4 +1,4 @@
-#!/home/N0maD/My_Works/Django/18_07_2015/Step0/bin/python
+#!/home/vronsky/Works/Projects/GeoRouteTrack/bin/python
 # Copyright (c) 2005-2012 Stephen John Machin, Lingfo Pty Ltd
 # This script is part of the xlrd package, which is released under a
 # BSD-style licence.
