@@ -22,7 +22,7 @@ from login.views import ExcelView
 urlpatterns = [
     	url(r'^$','login.views.LoginView',name='Login'),
 	url(r'^accounts/', include('registration.backends.default.urls')),
-	url(r'^excel/?$', 'login.views.ExcelView', name='readmapdata1'),	
+	url(r'^excel/?$', 'login.views.ExcelView', name='readmapdata'),	
 	url(r'^map/$','login.views.MapView',name='Map Render'),
 	url(r'^debug/parseddata/$','login.views.DebugViewParsedData',name='For Debugging - Parsed Data'),
 	#Please comment this line during deployment
