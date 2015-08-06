@@ -56,12 +56,18 @@ def ExcelView(request):
 	    if form.is_valid():
 		form.save()
 		FilePath["Excel"]=request.FILES['f']
-		return HttpResponseRedirect('/map')
+		if not str(request.user)=="AnonymousUser":
+			return HttpResponseRedirect('/map')
+		else:
+			return render(request,'georoutetrack.html',{})
 	else:
 		form=FileForm()
 	
 	context = {}
 	context.update(csrf(request))
 	context["form"]=form
-	
-	return render_to_response('excel-file-input.html',context)
+		
+	if not str(request.user)=="AnonymousUser":
+		return render(request,'excel-file-input.html',context)
+	else:
+		return render(request,'georoutetrack.html',{})
